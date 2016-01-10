@@ -44,12 +44,12 @@ void insert_array(struct sequence *seq, int element) {
 int main() {
   int N;
   int Q;
-  struct array* list;
+  struct array list;
   // Read the first line
   scanf("%d %d", &N, &Q);
 
   // Initialize list
-  init(list, N, 5);
+  init(&list, N, 5);
   int lastans = 0;
   for(int i = 0; i < Q; i++) {
     // Read Query
@@ -59,12 +59,12 @@ int main() {
       // Insert operation
       // Insert y into (x xor lastans mod-n)th sequence
       int index = (x ^ lastans) % N;
-      struct sequence *seq = &(list->sequences[index]);
+      struct sequence *seq = &(list.sequences[index]);
       insert_array(seq, y);
     } else if(t == 2) {
       // Get sequence
       int index = (x ^ lastans) % N;
-      struct sequence *seq = &(list->sequences[index]);
+      struct sequence *seq = &(list.sequences[index]);
       // Get (y mod size)th element
       int element = seq->data[y % seq->no_of_elements];
       lastans = element;
