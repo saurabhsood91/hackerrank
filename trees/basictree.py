@@ -29,6 +29,39 @@ class Tree():
         self.postorder(root.right)
         print root.data, ' ',
 
+    def levelorder(self):
+        if self.root == None:
+            return
+
+        queue = []
+        temp_node = self.root
+
+        while temp_node != None:
+            # visit node
+            print temp_node.data, ' ',
+
+            #enqueue children
+            if temp_node.left != None:
+                queue.append(temp_node.left)
+            if temp_node.right != None:
+                queue.append(temp_node.right)
+
+            if len(queue) == 0:
+                break
+            else:
+                # dequeue an element to be visited
+                temp_node = queue.pop(0)
+    def print_kth_level(self, k):
+        self._kth_level(self.root, k)
+
+    def _kth_level(self, root, k):
+        if root == None:
+            return
+        if k == 1:
+            print root.data, ' ',
+        else:
+            self._kth_level(root.left, k - 1)
+            self._kth_level(root.right, k - 1)
 
 if __name__ == "__main__":
     node_1 = Node(1)
@@ -48,3 +81,8 @@ if __name__ == "__main__":
     tree.inorder(tree.root)
     print
     tree.postorder(tree.root)
+    print
+    tree.levelorder()
+    print
+    tree.print_kth_level(3)
+    print
